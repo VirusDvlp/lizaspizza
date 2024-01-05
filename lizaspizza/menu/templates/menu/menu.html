@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load list_of_goods%}
+{% load static %}
+{% block content %}
+    <h1>Меню</h1>
+    {% list_of_goods as menu%}
+    <div id="menu">
+        <table>
+        {% for row in menu %}
+            <tr class="row">
+                {% for p in row %}
+                    <td class="row-el">
+                        <div class="good">
+                            <a href="{% url 'pizza' p.id %}">
+                                <img src="{% good_img p.img %}">
+                                <p>{{ p.name }} - {{ p.price }} руб</p>
+                                <p>{{ p.descr|truncatechars:10 }}</p>
+                            </a>
+                        </div>
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock%}
